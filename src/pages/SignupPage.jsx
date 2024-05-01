@@ -5,13 +5,13 @@ const SignupPage = () => {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
-  const [LastName, setLastname] = useState("");
-  const [dateOfBirth, setdateOfBirth] = useState();
+  const [lastName, setLastname] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(Date.now());
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(firstName, LastName, dateOfBirth, password);
+    console.log(firstName, lastName, dateOfBirth, password);
 
     try {
       const response = await fetch(
@@ -21,7 +21,7 @@ const SignupPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ firstName, LastName, dateOfBirth, password }),
+          body: JSON.stringify({ firstName, lastName, dateOfBirth, password }),
         }
       );
       if (response.status === 201) {
@@ -50,7 +50,7 @@ const SignupPage = () => {
         <label>
           LastName
           <input
-            value={LastName}
+            value={lastName}
             placeholder="Lastname"
             onChange={(event) => setLastname(event.target.value)}
             required
@@ -61,8 +61,9 @@ const SignupPage = () => {
           <input
             value={dateOfBirth}
             placeholder="D.O.B"
-            onChange={(event) => setdateOfBirth(event.target.value)}
+            onChange={(event) => setDateOfBirth(event.target.value)}
             required
+            type="date"
           />
         </label>
         <label>

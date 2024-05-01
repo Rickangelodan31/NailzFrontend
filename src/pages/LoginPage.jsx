@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
+import "../pages/Login.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -37,13 +38,14 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label>
           Username
           <input
-            value={username} placeholder="Username"
+            value={username}
+            placeholder="Username"
             onChange={(event) => setUsername(event.target.value)}
             required
           />
@@ -51,7 +53,8 @@ const LoginPage = () => {
         <label>
           Password
           <input
-            value={password} placeholder="Password"
+            value={password}
+            placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
             required
             type="password"
@@ -59,7 +62,7 @@ const LoginPage = () => {
         </label>
         <button type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 };
 
