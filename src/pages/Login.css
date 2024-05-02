@@ -2,15 +2,48 @@
   margin: 0;
   padding: 0;
 }
+body {
+  animation: changeColor 5s infinite; /* Apply the animation to the body element */
+}
 
-.navb {
+.signup h1 {
+  margin: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+  column-gap: 1em;
+}
+.label input {
+  margin: 5px;
+  padding: 5px;
+}
+.h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@keyframes changeColor {
+  0% {
+    background-color: #5d5f4f;
+  } /* Start color */
+
+  25% {background-color: #504a4a
+  }
+
+  100% {
+    background-color: #ffffff;
+  } /* End color */
 }

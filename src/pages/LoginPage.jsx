@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-import "../pages/Login.css";
+import "./login.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="signup">
       <h1>Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label>
@@ -52,7 +52,7 @@ const LoginPage = () => {
         </label>
         <label>
           Password
-          <input
+          <input 
             value={password}
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}

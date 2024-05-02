@@ -1,0 +1,31 @@
+.navbar {
+  width: 100%;
+  height: 80px;
+  background-color: rgb(19, 19, 19);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar ul {
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar li {
+  text-decoration: none;
+  color: white;
+  margin-left: 20px;
+  font-size: 25px;
+  list-style: none;
+}
+.navbar a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.navbar a:hover {
+  color: #12ccfa;
+  cursor: pointer;
+}
