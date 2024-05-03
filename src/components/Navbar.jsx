@@ -1,14 +1,17 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
+import { Button } from "@mantine/core";
+
 import "./navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ darkMode, toggleMode }) => {
   const { token, logout } = useContext(SessionContext);
-
+ 
   return (
-    <div>
-      <div className="navbar">
+    <div className='navbar'>
+   
+      <div>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -40,6 +43,9 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+      <Button className="togglebutt" color={darkMode ? "dark" : "light"} onClick={toggleMode}>
+        {darkMode ? "Dark mode" : "Light mode"}
+      </Button>
     </div>
   );
 };

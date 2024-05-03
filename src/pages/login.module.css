@@ -2,11 +2,8 @@
   margin: 0;
   padding: 0;
 }
-body {
-  animation: changeColor 5s infinite; /* Apply the animation to the body element */
-}
 
-.signup h1 {
+.login h1 {
   margin: 3rem;
   display: flex;
   align-items: center;
@@ -35,15 +32,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-@keyframes changeColor {
-  0% {
-    background-color: #5d5f4f;
-  } /* Start color */
 
-  25% {background-color: #504a4a
-  }
-
-  100% {
-    background-color: #ffffff;
-  } /* End color */
+.passtoggle {
+  width: 30px;
+  height: 30px;
 }

@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sign {
+  column-gap: 4em;
+}
+
+.sign label {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: 4em;
+}
+.sign input{
+    width: 400px;
+    
+}
+
+.sign input::placeholder{
+    text-align: center;
+    line-height: inherit; 
+    vertical-align: middle;
+}
+
+.button {
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+}

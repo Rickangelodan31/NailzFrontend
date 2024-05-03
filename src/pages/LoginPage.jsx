@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
+import classes from "./login.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const LoginPage = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,15 +37,19 @@ const LoginPage = () => {
       console.log(error);
     }
   };
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
-    <div className="signup">
+    <div className="login">
       <h1>Login</h1>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <label>
           Username
           <input
-            value={username}
+            value={username}clear 
+            
             placeholder="Username"
             onChange={(event) => setUsername(event.target.value)}
             required
@@ -58,7 +63,9 @@ const LoginPage = () => {
             onChange={(event) => setPassword(event.target.value)}
             required
             type="password"
-          />
+          /><button className="passtoggle" type="button" onClick={togglePasswordVisibility}>
+          {showPassword ? "Hide Password" : "Show Password"}
+        </button>
         </label>
         <button type="submit">Log In</button>
       </form>
