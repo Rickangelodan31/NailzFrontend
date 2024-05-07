@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-import classes from "./login.css";
+import classes from "./login.module.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -48,8 +48,7 @@ const LoginPage = () => {
         <label>
           Username
           <input
-            value={username}clear 
-            
+            value={username}
             placeholder="Username"
             onChange={(event) => setUsername(event.target.value)}
             required
@@ -57,15 +56,20 @@ const LoginPage = () => {
         </label>
         <label>
           Password
-          <input 
+          <input
             value={password}
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
             required
             type="password"
-          /><button className="passtoggle" type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? "Hide Password" : "Show Password"}
-        </button>
+          />
+          <button
+            className="passtoggle"
+            type="button"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? "Hide Password" : "Show Password"}
+          </button>
         </label>
         <button type="submit">Log In</button>
       </form>

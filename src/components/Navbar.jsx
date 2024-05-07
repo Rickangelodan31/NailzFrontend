@@ -19,7 +19,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
           {token ? (
             <>
               <li>
-                <Link to="/books/new">Create new post</Link>
+                <Link to="/newPost">Create new post</Link>
               </li>
               <li>
                 <Link to="/profile">Profile</Link>

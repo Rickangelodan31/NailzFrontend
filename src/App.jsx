@@ -1,11 +1,13 @@
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import Content from "./Content";
-import PrivateRoute from "./components/PrivateRoute";
 import { useState } from "react";
+import CreateNewDesigner from "./pages/CreateNewDesigner";
+import CreatePostForm from "./components/CreatePostForm";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -15,22 +17,21 @@ function App() {
   return (
     <>
       <div className={darkMode ? "dark-mode" : "light-mode"}>
-          <Navbar darkMode={darkMode} toggleMode={toggleMode} />
-          <Content darkMode={darkMode} />
+        <Navbar darkMode={darkMode} toggleMode={toggleMode} />
+        <Content darkMode={darkMode} />
 
-          <Routes>
-            <Route path="/" element={<h1>Home page</h1>} />
-            <Route
-              path="/signup"
-              element={<SignupPage darkMode={darkMode} />}
-            />
-            <Route path="/login" element={<LoginPage darkMode={darkMode} />} />
-            <Route
-              path="/profile"
-              element={<ProfilePage darkMode={darkMode} />}/>
-            <Route path="*" element={<h1>404 page</h1>} />
-          </Routes>
-      
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signup" element={<SignupPage darkMode={darkMode} />} />
+          <Route path="/login" element={<LoginPage darkMode={darkMode} />} />
+          <Route
+            path="/profile"
+            element={<ProfilePage darkMode={darkMode} />}
+          />
+          <Route path="/newPost" element={<CreatePostForm />} />
+          <Route path="/newDesigner" element={<CreateNewDesigner />} />
+          <Route path="*" element={<h1>404 page</h1>} />
+        </Routes>
       </div>
     </>
   );

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useWindowScroll } from "@mantine/hooks";
 import { Button, Group } from "@mantine/core";
 import { format } from "date-fns";
-import "./signupPage.css";
+import classes from "./signupPage.module.css";
+
 const SignupPage = () => {
   const navigate = useNavigate();
 
@@ -15,10 +16,11 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [scroll, scrollTo] = useWindowScroll();
-  const [username, setUsername] = useState("randome");
+  const [username, setUsername] = useState("random");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(firstName, lastName, dateOfBirth, password);
+    console.log(username, firstName, lastName, dateOfBirth, password);
 
     try {
       const response = await fetch(
@@ -53,7 +55,7 @@ const SignupPage = () => {
       <div className="sign">
         <h1>Signup</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <label>
             FirstName
             <input
@@ -69,6 +71,15 @@ const SignupPage = () => {
               value={lastName}
               placeholder="Lastname"
               onChange={(event) => setLastname(event.target.value)}
+              required
+            />
+          </label>
+          <label>
+            username
+            <input
+              value={username}
+              placeholder="username"
+              onChange={(event) => setUsername(event.target.value)}
               required
             />
           </label>
