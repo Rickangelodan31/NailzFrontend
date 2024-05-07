@@ -10,19 +10,16 @@ const ProfilePage = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [bio, setBio] = useState("");
   const [age, setAge] = useState("");
-  const [designer, setDesigner] = useState();
   const [username, setUsername] = useState();
   useEffect(() => {
     // let's make a function inside ..
-    async function fetchDesignerDetails() {
+    async function fetchUserDetails() {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/designer`
-        );
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user`);
         const data = await response.json();
         console.log(data);
         // Update the product state with the fetched data
-        setDesigner(data);
+        setUser(data);
       } catch (error) {
         // Log the error if the fetch fails
         console.log("Error fetching user details:", error);
@@ -31,7 +28,7 @@ const ProfilePage = () => {
 
     // Check if the productId is not null, then call the function
 
-    fetchDesignerDetails();
+    fetchUserDetails();
   }, []);
 
   const handleDrop = (acceptedFiles) => {
