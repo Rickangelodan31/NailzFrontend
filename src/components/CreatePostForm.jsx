@@ -1,44 +1,78 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
+import { SessionContext } from "../contexts/SessionContext";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostForm = ({ setPosts }) => {
+  const navigate = useNavigate();
+  const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [style, setStyle] = useState("");
+  const { token } = useContext(SessionContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const fData = new FormData();
+    const image = event.target.image.files[0];
+    fData.append("description", description);
+    fData.append("title", title);
+    fData.append("style", style);
+    fData.append("image", image);
     try {
-      // Make a POST request to create a new post
-      const response = await axios.post("/api/posts", { title, content });
-      const newPost = response.data;
-
-      // Update the list of posts by adding the newly created post
-      setPosts((prevPosts) => [newPost, ...prevPosts]);
-      setTitle("");
-      setContent("");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Designer`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: fData,
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        navigate("/");
+      }
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.log(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(event) => setTitle(event.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Content"
-        value={content}
-        onChange={(event) => setContent(event.target.value)}
-        required
-      ></textarea>
-      <button type="submit">Create Post</button>
-    </form>
+    <>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        {" "}
+        <label>
+          {" "}
+          Description{" "}
+          <input
+            type="text"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </label>
+        <label>
+          {" "}
+          Title{" "}
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </label>
+        <label>
+          {" "}
+          Style{" "}
+          <input
+            type="text"
+            value={style}
+            onChange={(event) => setStyle(event.target.value)}
+          />
+        </label>
+        <label>
+          {" "}
+          Image <input type="file" name="image" accept="image/jpg, image/png" />
+        </label>
+        <button>Submit</button>
+      </form>
+    </>
   );
 };
 

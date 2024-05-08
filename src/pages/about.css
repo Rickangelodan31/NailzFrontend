@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  text-align: center;
+  margin-top: 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2,
+h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-abt {
+  /* width: 100%; */
+  height: 90%;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* margin-top: 50px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 2rem;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0 50px #333;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 25px;
+  line-height: 1.5;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.links {
+  /* margin-left: 37%; */
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  /* width: 50px;
+  height: 50px; */
+}
+
+a a{
+  width: 45px;
+  height: 45px;
+}
+
+.Ric-abt img {
+  width: 500px;
+  height: 500px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}

@@ -1,30 +1,39 @@
-import { useRef, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Button, Group } from "@mantine/core";
+import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import "@mantine/dropzone/styles.css";
+import { SessionContext } from "../contexts/SessionContext";
 
 const ProfilePage = () => {
+  const { token } = useContext(SessionContext);
+
   const [files, setFiles] = useState([]);
   const [user, setUser] = useState();
   const [profilePicture, setProfilePicture] = useState(null);
   const [bio, setBio] = useState("");
   const [age, setAge] = useState("");
   const [username, setUsername] = useState();
+
+  async function fetchUserDetails() {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      // Update the product state with the fetched data
+      setUser(data);
+    } catch (error) {
+      // Log the error if the fetch fails
+      console.log("Error fetching user details:", error);
+    }
+  }
+
   useEffect(() => {
     // let's make a function inside ..
-    async function fetchUserDetails() {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/user`);
-        const data = await response.json();
-        console.log(data);
-        // Update the product state with the fetched data
-        setUser(data);
-      } catch (error) {
-        // Log the error if the fetch fails
-        console.log("Error fetching user details:", error);
-      }
-    }
 
     // Check if the productId is not null, then call the function
 
@@ -41,7 +50,7 @@ const ProfilePage = () => {
       formData.append("profilePicture", files[0]);
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/user/profilePicture`,
+        `${import.meta.env.VITE_API_URL}/users/profilePicture`,
         {
           method: "POST",
           body: formData,
@@ -61,23 +70,22 @@ const ProfilePage = () => {
 
   const handleUpdateProfile = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/user/updateProfile`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            bio,
-            age,
-          }),
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name,
+          bio,
+          age,
+        }),
+      });
 
       if (response.ok) {
         console.log("Profile updated successfully");
+        fetchUserDetails();
       } else {
         console.error("Failed to update profile");
       }
@@ -90,7 +98,7 @@ const ProfilePage = () => {
     <>
       <div>
         <h2>Profile Picture</h2>
-        <Dropzone onDrop={handleDrop} accept={IMAGE_MIME_TYPE}>
+        {/* <Dropzone onDrop={handleDrop} accept={IMAGE_MIME_TYPE}>
           {({ over }) => (
             <div
               style={{
@@ -103,7 +111,7 @@ const ProfilePage = () => {
               Drop profile picture here or click to select
             </div>
           )}
-        </Dropzone>
+        </Dropzone> */}
         {files.length > 0 && (
           <Button
             onClick={handleProfilePictureUpload}

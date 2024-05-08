@@ -39,7 +39,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
             </>
           )}
           <li>
-            <Link to="/books">All Post</Link>
+            <Link to="/about">About</Link>
           </li>
         </ul>
       </div>

@@ -43,6 +43,7 @@ const SessionContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    console.log(token)
     if (token) {
       window.localStorage.setItem("authToken", token);
     }

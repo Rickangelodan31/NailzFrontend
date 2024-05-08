@@ -8,6 +8,7 @@ import Content from "./Content";
 import { useState } from "react";
 import CreateNewDesigner from "./pages/CreateNewDesigner";
 import CreatePostForm from "./components/CreatePostForm";
+import AboutPage from "./pages/About";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -30,6 +31,7 @@ function App() {
           />
           <Route path="/newPost" element={<CreatePostForm />} />
           <Route path="/newDesigner" element={<CreateNewDesigner />} />
+          <Route path="/about" element={<AboutPage/>} />
           <Route path="*" element={<h1>404 page</h1>} />
         </Routes>
       </div>
