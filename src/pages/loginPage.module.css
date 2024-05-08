@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login h1 {
+    margin: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1em;
+    column-gap: 1em;
+  }
+  .label input {
+    margin: 5px;
+    padding: 5px;
+  }
+  .h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .passtoggle {
+    width: 30px;
+    height: 30px;
+  }

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
+import { useNavigate } from "react-router-dom";
 const CreateNewDesigner = () => {
+  const navigate = useNavigate();
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [style, setStyle] = useState("");
@@ -27,6 +29,7 @@ const CreateNewDesigner = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        navigate("/");
       }
     } catch (error) {
       console.log(error);

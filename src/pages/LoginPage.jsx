@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
-import classes from "./login.module.css";
+import classes from "./loginPage.module.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
