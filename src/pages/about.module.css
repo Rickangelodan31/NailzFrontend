@@ -76,7 +76,11 @@ a a {
   }
 
   .img {
-    width: 75%;
+    transform: scale(0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
   }
 }
 
@@ -98,10 +102,11 @@ a a {
     align-items: center;
   }
   .img {
-    
+    transform: scale(0.7);
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
 }
 
