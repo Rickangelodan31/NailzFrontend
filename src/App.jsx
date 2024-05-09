@@ -11,6 +11,7 @@ import CreatePostForm from "./components/CreatePostForm";
 import AboutPage from "./pages/About";
 import Sidebar from "./components/Sidebar";
 import Achievements from "./pages/Achievements";
+import MessageBox from "./pages/MessageBox";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/newPost" element={<CreatePostForm />} />
           <Route path="/newDesigner" element={<CreateNewDesigner />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/message" element={<MessageBox darkMode={darkMode} />} />
 
           <Route
             path="/achievements"

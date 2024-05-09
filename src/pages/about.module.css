@@ -56,7 +56,7 @@ p {
   height: 50px; */
 }
 
-a a{
+a a {
   width: 45px;
   height: 45px;
 }
@@ -69,4 +69,63 @@ a a{
   justify-content: center;
   align-items: center;
   margin: 50px;
+}
+@media (min-width: 375px) and (max-width: 412px) {
+  .navAbt {
+    width: 85%;
+  }
+
+  .img {
+    width: 75%;
+  }
+}
+
+@media (min-width: 412px) and (max-width: 430px) {
+  .navAbt {
+    width: 80%;
+  }
+
+  .img {
+    width: 70%;
+  }
+}
+
+@media (min-width: 430px) and (max-width: 576px) {
+  .navAbt {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .img {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .navAbt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .navAbt {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    width: 30%;
+  }
 }

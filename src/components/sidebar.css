@@ -5,11 +5,7 @@
   /* text-align: center; */
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
+
 .body {
   position: absolute;
   top: 0;
@@ -23,6 +19,7 @@ body {
   width: 250px;
   background-color: #2f4050;
   transition: left 0.3s ease;
+  text-decoration: none;
 }
 
 .sidebar:hover {
@@ -33,10 +30,11 @@ body {
   height: auto;
   padding: 0;
   width: 100%;
+  text-decoration: none;
 }
 
 .SidebarList .row {
-  width: 100%;
+  width: 50%;
   height: 100px;
   list-style-type: none;
   margin: 20%;
@@ -48,6 +46,7 @@ body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   column-gap: 5em;
+  text-decoration: none;
 }
 
 .SidebarList .row:hover {
@@ -58,10 +57,14 @@ body {
   flex: 30%;
   display: grid;
   place-items: center;
+  color: white;
+  text-decoration: none;
 }
 
 .row #title {
   flex: 70%;
+  color: white;
+  text-decoration: none;
 }
 
 .logo {
@@ -69,6 +72,7 @@ body {
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  text-decoration: none;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);

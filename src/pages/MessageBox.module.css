@@ -1,0 +1,104 @@
+/* MessageBox.module.css */
+.messageBox {
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  
+}
+
+.messageContainer {
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  
+}
+
+.message {
+  background-color: #f0f0f0;
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sendButton {
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sendButton:hover {
+  background-color: #0056b3;
+}
+.messageBoxContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+@media (max-width: 430px) {
+    .messageBox {
+      width: 50%; /* Adjust width for smaller screens */
+      max-width: 100%; /* Remove max-width for smaller screens */
+    }
+  }
+  
+  @media (min-width: 375px) and (max-width: 412px) {
+    .messageBox {
+      width: 60%; /* Adjust width for 412px screen */
+    }
+  }
+  
+  @media (min-width: 412px) and (max-width: 430px) {
+    .messageBox {
+      width: 50%; /* Adjust width for 430px screen */
+    }
+  }
+  
+  @media (min-width: 375px) and (max-width: 375px) {
+    .messageBox {
+      width: 50%; /* Adjust width for 375px screen */
+    }
+  }
+
+@media (max-width: 576px) {
+    .messageBox {
+      width: 90%; 
+      max-width: 100%; 
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) {
+    .messageBox {
+      width: 70%; 
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 992px) {
+    .messageBox {
+      width: 60%; 
+    }
+  }
+  
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .messageBox {
+      width: 50%; 
+    }
+  }

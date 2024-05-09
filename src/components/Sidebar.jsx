@@ -17,7 +17,7 @@ const Sidebar = () => {
           return (
             <li key={key} className="row">
               {" "}
-              <Link to={val.link}>
+              <Link  to={val.link} className="sidebar-link">
                 <div id="icon">{val.icon}</div>
                 <div id="title">{val.title}</div>
               </Link>

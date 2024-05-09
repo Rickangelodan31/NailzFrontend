@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import { Button } from "@mantine/core";
@@ -7,12 +7,22 @@ import "./navbar.css";
 
 const Navbar = ({ darkMode, toggleMode }) => {
   const { token, logout } = useContext(SessionContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggleClick = () => {
+    setIsOpen(!isOpen);
+  };
  
   return (
+    
     <div className='navbar'>
    
-      <div>
-        <ul>
+      <div className={`navbar ${isOpen ? "open" : ""}`}>
+      <div className="navbar-toggle" onClick={handleToggleClick}>
+        ☰
+      </div>
+     
+        <ul className={`navbar-links ${isOpen ? "open" : ""}`}>
           <li>
             <Link to="/">Home</Link>
           </li>

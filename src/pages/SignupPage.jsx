@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useWindowScroll } from "@mantine/hooks";
 import { Button, Group } from "@mantine/core";
 import { format } from "date-fns";
-import classes from "./style/signupPage.module.css";
+import classes from "./signupPage.module.css";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -51,6 +51,7 @@ const SignupPage = () => {
   };
 
   return (
+    <div className={classes.page}>
     <div className={classes.pageContainer}>
       <div className="sign">
         <h1>Signup</h1>
@@ -127,7 +128,9 @@ const SignupPage = () => {
         </form>
       </div>
 
-      <Group className={classes.scrollbutton} justify="center">
+      
+    </div>
+    <Group className={classes.scrollbutton} justify="center">
         {/* <Text>
           Scroll position x: {scroll.x}, y: {scroll.y}
         </Text> */}

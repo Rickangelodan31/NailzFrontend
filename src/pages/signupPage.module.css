@@ -64,3 +64,68 @@
   width: 800px; /* Set the desired width for your page */
   margin: 0 auto; /* Center the page horizontally */
 }
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.scrollbutton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+@media (max-width: 576px) {
+  .pageContainer {
+    padding: 10px;
+  }
+
+  .input {
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+}
+@media (min-width: 300px) and (max-width: 429px) {
+  .pageContainer {
+    max-width: 250px; /* Adjust the maximum width for smaller screens */
+  }
+}
+@media (min-width: 430px) and (max-width: 576px) {
+  .pageContainer {
+    max-width: 360px; /* Adjust the maximum width for smaller screens */
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .pageContainer {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .pageContainer {
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .pageContainer {
+    max-width: 800px;
+  }
+}

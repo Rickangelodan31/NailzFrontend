@@ -1,11 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { Button, Group } from "@mantine/core";
 import "@mantine/dropzone/styles.css";
 import { SessionContext } from "../contexts/SessionContext";
 import classes from "./profilePage.module.css";
-
+import { useWindowScroll } from "@mantine/hooks";
 const ProfilePage = () => {
   const { token } = useContext(SessionContext);
 
@@ -15,6 +14,7 @@ const ProfilePage = () => {
   const [bio, setBio] = useState("");
   const [age, setAge] = useState("");
   const [username, setUsername] = useState();
+  const [scroll, scrollTo] = useWindowScroll();
 
   async function fetchUserDetails() {
     try {
@@ -97,7 +97,8 @@ const ProfilePage = () => {
         <h2 className={classes.h2}>Profile Picture</h2>
 
         {files.length > 0 && (
-          <Button className={classes.Butt}
+          <Button
+            className={classes.Butt}
             onClick={handleProfilePictureUpload}
             style={{ marginTop: "10px" }}
           >
@@ -105,7 +106,8 @@ const ProfilePage = () => {
           </Button>
         )}
         {profilePicture && (
-          <img className={classes.imagePP}
+          <img
+            className={classes.imagePP}
             src={profilePicture}
             alt="Profile"
             style={{ marginTop: "10px", width: "200px" }}
@@ -133,22 +135,36 @@ const ProfilePage = () => {
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-        </label >
-        <Button  onClick={handleUpdateProfile}>Update Profile</Button>
+        </label>
+        <Button onClick={handleUpdateProfile}>Update Profile</Button>
       </div>
       <div className={classes.detailsContainer}>
-        <Link to="/newDesigner">Create Desiner</Link>
+        <Button className={classes.Butt}>
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            to="/newDesigner"
+          >
+            Create Desiner
+          </Link>
+        </Button>
         {user ? (
           <div className="details-Container">
             <h2>{user.title}</h2>
-            <img  src={user.image} alt={user.title} />
-            <p>Price: ${user.price}</p>
-            <p>Description: {user.description}</p>
+            <img src={user.image} alt={user.title} />
+            {/* <p>{user.price}</p>
+            <p> {user.description}</p> */}
             {/* Add more product details here as needed */}
           </div>
         ) : (
           <p>Loading product details...</p>
         )}
+
+        <Group className={classes.scrollbutton} justify="center">
+          {/* <Text>
+          Scroll position x: {scroll.x}, y: {scroll.y}
+        </Text> */}
+          <Button onClick={() => scrollTo({ y: 0 })}>Scroll to top</Button>
+        </Group>
       </div>
     </>
   );

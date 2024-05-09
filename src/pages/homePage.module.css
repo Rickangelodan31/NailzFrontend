@@ -2,7 +2,10 @@
   margin: 0;
   padding: 0;
 }
-
+.h1 {
+  font-size: 2rem; /* Adjust heading font size */
+  margin-bottom: 20px; /* Add margin below heading */
+}
 img {
   max-width: 100%;
   display: flex;
@@ -21,6 +24,13 @@ img {
   flex-wrap: wrap;
   font-size: 20px;
   border: 1px;
+}
+.post h2 {
+  font-size: 1.5rem; /* Adjust post title font size */
+}
+.post p {
+  margin-top: 10px; 
+  font-size: 1rem;
 }
 .container {
   /* height: 100%; */

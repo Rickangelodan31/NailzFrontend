@@ -13,7 +13,9 @@
   display: flex;
   align-items: center;
 }
-
+.navbar-toggle {
+  display: none;
+}
 .navbar li {
   text-decoration: none;
   color: white;
@@ -30,43 +32,52 @@
   color: #12ccfa;
   cursor: pointer;
 }
-.togglebutt{
-  width: 100px;
-  height: 50px;
-}
+
 @media (max-width: 768px) {
   .navbar ul {
     margin-right: 20px; /* Adjust margin for smaller screens */
   }
-
+  .navbar-toggle {
+    display: none;
+  }
   .navbar li {
     font-size: 20px; /* Adjust font size for smaller screens */
   }
 }
-
 @media (max-width: 576px) {
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px; /* Adjust the distance from the top as needed */
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: grey;
+    padding: 20px;
+    z-index: 999; /* Ensure the dropdown is above other elements */
+  }
+
+  .navbar-links.open {
+    display: none;
+  }
+
+  .navbar-links li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
   .navbar {
-    height: 60px; /* Adjust navbar height for smaller screens */
+    width: 100%;
+    left: 0;
+    right: 0;
+    
   }
 
-  .navbar ul {
-    margin-right: 10px; /* Adjust margin for even smaller screens */
-  }
-
-  .navbar li {
-    font-size: 16px; /* Adjust font size for even smaller screens */
-  }
-}
-@media (max-width: 430px) {
-  .navbar {
-    height: 50px; /* Adjust navbar height for very small screens */
-  }
-
-  .navbar ul {
-    margin-right: 5px; /* Adjust margin for very small screens */
-  }
-
-  .navbar li {
-    font-size: 14px; /* Adjust font size for very small screens */
+  .navbar-toggle {
+    display: block;
+    margin-right: 150px;
+    justify-content: center;
+    align-items: center;
+  
   }
 }

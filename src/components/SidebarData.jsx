@@ -10,7 +10,7 @@ export const SidebarData = [
   {
     title: "Home",
     icon: <HomeIcon />,
-    link: "/home",
+    link: "/",
   },
   {
     title: "About",
@@ -20,7 +20,7 @@ export const SidebarData = [
   {
     title: "MailBox",
     icon: <MailIcon />,
-    link: "/mailicon",
+    link: "/message",
   },
   {
     title: "Images",
