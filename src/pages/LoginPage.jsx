@@ -61,7 +61,7 @@ const LoginPage = () => {
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
             required
-            type="password"
+            type={showPassword ? "text" : "password"}
           />
           <button
             className="passtoggle"
