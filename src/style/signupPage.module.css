@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sign {
+  row-gap: 4em;
+}
+
+.sign label {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: 4em;
+}
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid #ccc; /* Adjust the border width and color as needed */
+  border-radius: 4px; /* Adjust the border radius as needed */
+}
+
+.sign input::placeholder{
+    text-align: center;
+    line-height: inherit; 
+    vertical-align: middle;
+}
+
+/* .button {
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+} */
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-bottom: 40px;
+
+}
+.formCountainer{
+  
+  justify-content: center;
+  align-items: center; 
+  height: 50px;
+  border-radius: 10px;
+  /* margin-left: 560px; */
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.label{
+  margin-bottom: 10px;
+}
+.pageContainer {
+  width: 800px; /* Set the desired width for your page */
+  margin: 0 auto; /* Center the page horizontally */
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
-import "./homePage.css";
+import classes from "./homePage.module.css";
 
 
 
@@ -42,14 +42,14 @@ const HomePage = () => {
   }
 
   return (
-    <>
-      <h1>Home Page</h1>
-      <div>
+    <div className={classes.container}>
+      <h1 className={classes.h1}>Home Page</h1>
+      <div className={classes.centered}>
         {posts.map((post) => (
-          <Post key={post._id} post={post} />
+          <Post key={post._id} post={post} className={classes.post} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

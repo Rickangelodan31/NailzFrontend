@@ -16,14 +16,15 @@ const Navbar = ({ darkMode, toggleMode }) => {
           <li>
             <Link to="/">Home</Link>
           </li>
+          <li>
+                <Link to="/profile">Profile</Link>
+              </li>
           {token ? (
             <>
               <li>
                 <Link to="/newPost">Create new post</Link>
               </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
+             
               <button type="button" onClick={logout}>
                 Logout
               </button>
@@ -36,6 +37,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
               <li>
                 <Link to="/login">Login</Link>
               </li>
+              
             </>
           )}
           <li>
@@ -43,8 +45,8 @@ const Navbar = ({ darkMode, toggleMode }) => {
           </li>
         </ul>
       </div>
-      <Button className="togglebutt" color={darkMode ? "dark" : "light"} onClick={toggleMode}>
-        {darkMode ? "Dark mode" : "Light mode"}
+      <Button  color={darkMode ? "dark" : "light"} onClick={toggleMode}>
+        {darkMode ? "Dark mode" : "Light mode"} 
       </Button>
     </div>
   );

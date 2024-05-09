@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useWindowScroll } from "@mantine/hooks";
 import { Button, Group } from "@mantine/core";
 import { format } from "date-fns";
-import classes from "./signupPage.module.css";
+import classes from "./style/signupPage.module.css";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [scroll, scrollTo] = useWindowScroll();
-  const [username, setUsername] = useState("random");
+  const [username, setUsername] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,81 +51,89 @@ const SignupPage = () => {
   };
 
   return (
-    <>
+    <div className={classes.pageContainer}>
       <div className="sign">
         <h1>Signup</h1>
 
         <form className={classes.form} onSubmit={handleSubmit}>
-          <label>
-            FirstName
-            <input
-              value={firstName}
-              placeholder="Firstname"
-              onChange={(event) => setFirstName(event.target.value)}
-              required
-            />
-          </label>
-          <label>
-            LastName
-            <input
-              value={lastName}
-              placeholder="Lastname"
-              onChange={(event) => setLastname(event.target.value)}
-              required
-            />
-          </label>
-          <label>
-            username
-            <input
-              value={username}
-              placeholder="username"
-              onChange={(event) => setUsername(event.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Date Of Birth
-            <input
-              value={dateOfBirth}
-              placeholder="D.O.B"
-              onChange={(event) => setDateOfBirth(event.target.value)}
-              required
-              type="date"
-            />
-          </label>
-          <label>
-            Email
-            <input
-              value={email}
-              placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
-              required
-              type="email"
-            />
-          </label>
-          <label>
-            Password
-            <input
-              value={password}
-              placeholder="Password"
-              onChange={(event) => setPassword(event.target.value)}
-              required
-              type="password"
-            />
-          </label>
+          <div className={classes.inputContainer}>
+            <label className={classes.label}>
+              FirstName
+              <input
+                value={firstName}
+                placeholder="Firstname"
+                onChange={(event) => setFirstName(event.target.value)}
+                required
+                className={classes.input}
+              />
+            </label>
+            <label className={classes.label}>
+              LastName
+              <input
+                value={lastName}
+                placeholder="Lastname"
+                onChange={(event) => setLastname(event.target.value)}
+                required
+                className={classes.input}
+              />
+            </label>
+            <label className={classes.label}>
+              username
+              <input
+                value={username}
+                placeholder="username"
+                onChange={(event) => setUsername(event.target.value)}
+                required
+                className={classes.input}
+              />
+            </label>
+            <label className={classes.label}>
+              Date Of Birth
+              <input
+                value={dateOfBirth}
+                placeholder="D.O.B"
+                onChange={(event) => setDateOfBirth(event.target.value)}
+                required
+                type="date"
+                className={classes.input}
+              />
+            </label>
+            <label className={classes.label}>
+              Email
+              <input
+                value={email}
+                placeholder="Email"
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                type="email"
+                className={classes.input}
+              />
+            </label>
+            <label className={classes.label}>
+              Password
+              <input
+                value={password}
+                placeholder="Password"
+                onChange={(event) => setPassword(event.target.value)}
+                required
+                type="password"
+                className={classes.input}
+              />
+            </label>
+          </div>
           <div className="button">
             <button type="submit">Sign Up</button>
           </div>
         </form>
       </div>
 
-      <Group className="scrollbutton" justify="center">
+      <Group className={classes.scrollbutton} justify="center">
         {/* <Text>
           Scroll position x: {scroll.x}, y: {scroll.y}
         </Text> */}
         <Button onClick={() => scrollTo({ y: 0 })}>Scroll to top</Button>
       </Group>
-    </>
+    </div>
   );
 };
 

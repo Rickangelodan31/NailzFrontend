@@ -4,6 +4,7 @@ import { Button } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import "@mantine/dropzone/styles.css";
 import { SessionContext } from "../contexts/SessionContext";
+import classes from "./profilePage.module.css";
 
 const ProfilePage = () => {
   const { token } = useContext(SessionContext);
@@ -39,10 +40,6 @@ const ProfilePage = () => {
 
     fetchUserDetails();
   }, []);
-
-  const handleDrop = (acceptedFiles) => {
-    setFiles(acceptedFiles);
-  };
 
   const handleProfilePictureUpload = async () => {
     try {
@@ -96,24 +93,11 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div>
-        <h2>Profile Picture</h2>
-        {/* <Dropzone onDrop={handleDrop} accept={IMAGE_MIME_TYPE}>
-          {({ over }) => (
-            <div
-              style={{
-                border: over ? "2px dashed #06c" : "2px dashed #ccc",
-                padding: "20px",
-                borderRadius: "4px",
-                textAlign: "center",
-              }}
-            >
-              Drop profile picture here or click to select
-            </div>
-          )}
-        </Dropzone> */}
+      <div className={classes.profileContainer}>
+        <h2 className={classes.h2}>Profile Picture</h2>
+
         {files.length > 0 && (
-          <Button
+          <Button className={classes.Butt}
             onClick={handleProfilePictureUpload}
             style={{ marginTop: "10px" }}
           >
@@ -121,16 +105,16 @@ const ProfilePage = () => {
           </Button>
         )}
         {profilePicture && (
-          <img
+          <img className={classes.imagePP}
             src={profilePicture}
             alt="Profile"
             style={{ marginTop: "10px", width: "200px" }}
           />
         )}
       </div>
-      <div>
-        <h2>Edit Profile</h2>
-        <label>
+      <div className={classes.profileSection}>
+        <h2 className={classes.h2}>Edit Profile</h2>
+        <label className={classes.label}>
           userame:
           <input
             type="text"
@@ -138,26 +122,26 @@ const ProfilePage = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        <label>
+        <label className={classes.label}>
           Bio:
           <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
         </label>
-        <label>
+        <label className={classes.label}>
           Age:
           <input
             type="text"
             value={age}
             onChange={(e) => setAge(e.target.value)}
           />
-        </label>
-        <Button onClick={handleUpdateProfile}>Update Profile</Button>
+        </label >
+        <Button  onClick={handleUpdateProfile}>Update Profile</Button>
       </div>
-      <div>
+      <div className={classes.detailsContainer}>
         <Link to="/newDesigner">Create Desiner</Link>
         {user ? (
           <div className="details-Container">
             <h2>{user.title}</h2>
-            <img src={user.image} alt={user.title} />
+            <img  src={user.image} alt={user.title} />
             <p>Price: ${user.price}</p>
             <p>Description: {user.description}</p>
             {/* Add more product details here as needed */}

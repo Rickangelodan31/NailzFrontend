@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
 import { useNavigate } from "react-router-dom";
+import { PriceChange } from "@mui/icons-material";
 const CreateNewDesigner = () => {
   const navigate = useNavigate();
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [style, setStyle] = useState("");
+  const [price, setPrice] = useState();
   const [telephone, setTelephone] = useState(0);
   const { token } = useContext(SessionContext);
 
@@ -70,6 +72,15 @@ const CreateNewDesigner = () => {
         <label>
           {" "}
           Image <input type="file" name="image" accept="image/jpg, image/png" />
+        </label>
+        <label>
+          {" "}
+          Price{" "}
+          <input
+            type="text"
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
+          />
         </label>
         <label>
           {" "}

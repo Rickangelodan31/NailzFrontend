@@ -9,6 +9,8 @@ import { useState } from "react";
 import CreateNewDesigner from "./pages/CreateNewDesigner";
 import CreatePostForm from "./components/CreatePostForm";
 import AboutPage from "./pages/About";
+import Sidebar from "./components/Sidebar";
+import Achievements from "./pages/Achievements";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -19,6 +21,7 @@ function App() {
     <>
       <div className={darkMode ? "dark-mode" : "light-mode"}>
         <Navbar darkMode={darkMode} toggleMode={toggleMode} />
+        <Sidebar className="sidebar" />
         <Content darkMode={darkMode} />
 
         <Routes>
@@ -31,7 +34,13 @@ function App() {
           />
           <Route path="/newPost" element={<CreatePostForm />} />
           <Route path="/newDesigner" element={<CreateNewDesigner />} />
-          <Route path="/about" element={<AboutPage/>} />
+          <Route path="/about" element={<AboutPage />} />
+
+          <Route
+            path="/achievements"
+            element={<Achievements darkMode={darkMode} />}
+          />
+          <Route path="/signup" element={<SignupPage darkMode={darkMode} />} />
           <Route path="*" element={<h1>404 page</h1>} />
         </Routes>
       </div>
