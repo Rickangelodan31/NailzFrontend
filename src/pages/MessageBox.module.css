@@ -60,11 +60,7 @@
     }
   }
   
-  @media (min-width: 375px) and (max-width: 412px) {
-    .messageBox {
-      width: 60%; /* Adjust width for 412px screen */
-    }
-  }
+
   
   @media (min-width: 412px) and (max-width: 430px) {
     .messageBox {
@@ -72,7 +68,7 @@
     }
   }
   
-  @media (min-width: 375px) and (max-width: 375px) {
+  @media (min-width: 375px) and (max-width: 412px) {
     .messageBox {
       width: 50%; /* Adjust width for 375px screen */
     }
