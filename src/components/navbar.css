@@ -32,6 +32,12 @@
   color: #12ccfa;
   cursor: pointer;
 }
+.butt {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 10px;
+}
 
 @media (max-width: 768px) {
   .navbar ul {

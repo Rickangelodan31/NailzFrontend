@@ -35,9 +35,6 @@ const Navbar = ({ darkMode, toggleMode }) => {
                 <Link to="/newPost">Create new post</Link>
               </li>
              
-              <button type="button" onClick={logout}>
-                Logout
-              </button>
             </>
           ) : (
             <>
@@ -53,6 +50,10 @@ const Navbar = ({ darkMode, toggleMode }) => {
           <li>
             <Link to="/about">About</Link>
           </li>
+          <div className="butt">
+              <button type="button" onClick={logout}>
+                Logout
+              </button></div>
         </ul>
       </div>
       <Button  color={darkMode ? "dark" : "light"} onClick={toggleMode}>
