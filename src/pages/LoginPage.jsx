@@ -54,7 +54,7 @@ const LoginPage = () => {
             required
           />
         </label>
-        <label>
+        <label className={classes.label}>
           Password
           <input
             value={password}

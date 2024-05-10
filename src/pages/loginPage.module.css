@@ -12,9 +12,9 @@
   .form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    row-gap: 1em;
+    row-gap: 2em;
     column-gap: 1em;
   }
   .label input {
@@ -43,3 +43,18 @@
     justify-content: center;
     align-items: center;
   }
+
+  .form button{
+    margin-top: 50px;
+    transform: scale(0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* .label{
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center;
+   
+  } */ 

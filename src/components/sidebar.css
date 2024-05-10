@@ -17,7 +17,7 @@
   left: -210px; /* Start off-screen */
   height: 100vh;
   width: 250px;
-  background-color: #2f4050;
+  background-color: #434950;
   transition: left 0.3s ease;
   text-decoration: none;
 }
