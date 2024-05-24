@@ -31,7 +31,7 @@ const CreateNewDesigner = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        navigate("/");
+        navigate("/profile");
       }
     } catch (error) {
       console.log(error);

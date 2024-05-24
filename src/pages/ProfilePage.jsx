@@ -5,16 +5,21 @@ import "@mantine/dropzone/styles.css";
 import { SessionContext } from "../contexts/SessionContext";
 import classes from "./profilePage.module.css";
 import { useWindowScroll } from "@mantine/hooks";
+import Post from "../components/Post";
+
 const ProfilePage = () => {
   const { token } = useContext(SessionContext);
 
   const [files, setFiles] = useState([]);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const [bio, setBio] = useState("");
   const [age, setAge] = useState("");
-  const [username, setUsername] = useState();
-  const [scroll, scrollTo] = useWindowScroll();
+  const [username, setUsername] = useState("");
+  const [scroll, scrollTo] = useWindowScroll("");
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   async function fetchUserDetails() {
     try {
@@ -91,6 +96,37 @@ const ProfilePage = () => {
     }
   };
 
+  useEffect(() => {
+    // Fetch posts from backend when component mounts
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      // Make API call to fetch posts from backend
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/Designer`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setPosts(data); // Assuming the response contains an array of posts
+      } else {
+        setError("Failed to fetch posts");
+      }
+    } catch (error) {
+      setError("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <>
       <div className={classes.profileContainer}>
@@ -144,7 +180,7 @@ const ProfilePage = () => {
             style={{ textDecoration: "none", color: "white" }}
             to="/newDesigner"
           >
-            Create Desiner
+            Create Design
           </Link>
         </Button>
         {user ? (
@@ -158,6 +194,11 @@ const ProfilePage = () => {
         ) : (
           <p>Loading product details...</p>
         )}
+        <div className={classes.centered}>
+          {posts.map((post) => (
+            <Post key={post._id} post={post} className={classes.post} />
+          ))}
+        </div>
 
         <Group className={classes.scrollbutton} justify="center">
           {/* <Text>
