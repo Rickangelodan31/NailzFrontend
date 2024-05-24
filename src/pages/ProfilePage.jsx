@@ -23,11 +23,14 @@ const ProfilePage = () => {
 
   async function fetchUserDetails() {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
       // Update the product state with the fetched data
@@ -37,14 +40,13 @@ const ProfilePage = () => {
       console.log("Error fetching user details:", error);
     }
   }
-
   useEffect(() => {
-    // let's make a function inside ..
-
-    // Check if the productId is not null, then call the function
-
-    fetchUserDetails();
-  }, []);
+    if (token) {
+      fetchUserDetails();
+    } else {
+      console.log("Token not provided or not valid");
+    }
+  }, [token]);
 
   const handleProfilePictureUpload = async () => {
     try {
@@ -52,7 +54,7 @@ const ProfilePage = () => {
       formData.append("profilePicture", files[0]);
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/users/profilePicture`,
+        `${import.meta.env.VITE_API_URL}/api/users/profilePicture`,
         {
           method: "POST",
           body: formData,
@@ -72,18 +74,21 @@ const ProfilePage = () => {
 
   const handleUpdateProfile = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name,
-          bio,
-          age,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name,
+            bio,
+            age,
+          }),
+        }
+      );
 
       if (response.ok) {
         console.log("Profile updated successfully");
@@ -104,7 +109,9 @@ const ProfilePage = () => {
   const fetchPosts = async () => {
     try {
       // Make API call to fetch posts from backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Designer`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/Designers`
+      );
       if (response.ok) {
         const data = await response.json();
         console.log(data);

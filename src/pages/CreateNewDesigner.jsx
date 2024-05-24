@@ -21,7 +21,7 @@ const CreateNewDesigner = () => {
     fData.append("telephone", telephone);
     fData.append("image", image);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Designer`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Designers`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

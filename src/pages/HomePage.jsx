@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import Post from "../components/Post";
 import classes from "./homePage.module.css";
 
-
-
-
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +15,9 @@ const HomePage = () => {
   const fetchPosts = async () => {
     try {
       // Make API call to fetch posts from backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/Designer`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/Designers`
+      );
       if (response.ok) {
         const data = await response.json();
         console.log(data);
