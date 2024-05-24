@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import CreatePostForm from "./CreatePostForm";
 import HomePage from "./HomePage";
+import ProfilePage from "../pages/ProfilePage";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -28,6 +29,7 @@ const Home = () => {
     <div>
       <CreatePostForm setPosts={setPosts} />
       <HomePage posts={posts} />
+      <ProfilePage posts={posts} />
     </div>
   );
 };

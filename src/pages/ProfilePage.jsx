@@ -83,7 +83,7 @@ const ProfilePage = () => {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            name,
+            username,
             bio,
             age,
           }),
@@ -160,7 +160,7 @@ const ProfilePage = () => {
       <div className={classes.profileSection}>
         <h2 className={classes.h2}>Edit Profile</h2>
         <label className={classes.label}>
-          userame:
+          username:
           <input
             type="text"
             value={username}

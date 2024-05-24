@@ -12,6 +12,7 @@ import AboutPage from "./pages/About";
 import Sidebar from "./components/Sidebar";
 import Achievements from "./pages/Achievements";
 import MessageBox from "./pages/MessageBox";
+import PrivateRoute from "./components/PrivateRoute";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -29,9 +30,15 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage darkMode={darkMode} />} />
           <Route path="/login" element={<LoginPage darkMode={darkMode} />} />
+
           <Route
             path="/profile"
-            element={<ProfilePage darkMode={darkMode} />}
+            element={
+              <PrivateRoute>
+                {" "}
+                <ProfilePage darkMode={darkMode} />{" "}
+              </PrivateRoute>
+            }
           />
           <Route path="/newPost" element={<CreatePostForm />} />
           <Route path="/newDesigner" element={<CreateNewDesigner />} />
