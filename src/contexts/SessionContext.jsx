@@ -5,6 +5,11 @@ export const SessionContext = createContext();
 const SessionContextProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState({
+    id: "userA_id",
+    firstName: "John",
+    lastName: "Doe",
+  }); // Example user
 
   const verifyToken = useCallback(async (currentToken) => {
     try {
@@ -21,6 +26,7 @@ const SessionContextProvider = ({ children }) => {
         const parsed = await response.json();
         console.log(parsed);
         setToken(currentToken);
+        setUser(parsed.user); // Assuming the response includes user data
       } else {
         window.localStorage.removeItem("authToken");
       }
@@ -78,7 +84,7 @@ const SessionContextProvider = ({ children }) => {
 
   return (
     <SessionContext.Provider
-      value={{ token, setToken, logout, isLoading, withToken }}
+      value={{ token, setToken, logout, isLoading, withToken, user, setUser }}
     >
       {children}
     </SessionContext.Provider>
