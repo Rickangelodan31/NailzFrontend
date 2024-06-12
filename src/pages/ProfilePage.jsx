@@ -16,7 +16,6 @@ const ProfilePage = ({ match }) => {
 
   const navigate = useNavigate(); // Added navigate for navigation
   const inputRef = useRef(null); // Added useRef for file input
-  const [files, setFiles] = useState([]); // Added state for files
   const [user, setUser] = useState(""); // Added state for user
   const [profilePicture, setProfilePicture] = useState(null); // Added state for profile picture
 
@@ -27,7 +26,6 @@ const ProfilePage = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState(""); // Added state for image
-  const [data, setData] = useState(""); // Added state for data
   const [scroll, scrollTo] = useWindowScroll(); // Added useWindowScroll hook
 
   useEffect(() => {
