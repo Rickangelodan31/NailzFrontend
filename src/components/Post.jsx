@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import classes from "./post.module.css";
+import { Button } from "@mantine/core";
+import { SessionContext } from "../contexts/SessionContext";
+import { Token } from "@mui/icons-material";
 
-const Post = ({ post }) => {
+
+const Post = ({ post}) => {
+ 
   const [showOverlay, setShowOverlay] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -14,6 +19,8 @@ const Post = ({ post }) => {
     setSelectedImage(null);
     setShowOverlay(false);
   };
+
+  
 
   return (
     <div className={classes.post}>

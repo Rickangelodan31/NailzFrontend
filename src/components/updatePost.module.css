@@ -1,0 +1,29 @@
+/* updatePost.module.css */
+.updateContainer {
+    margin: 20px;
+  }
+  
+  .updateContainer label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .updateContainer input,
+  .updateContainer textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .updateContainer button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .updateContainer button:hover {
+    background-color: #0056b3;
+  }
+  

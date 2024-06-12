@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SessionContext } from "../contexts/SessionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,7 +14,8 @@ const Navbar = ({ darkMode, toggleMode }) => {
   const [results, setResults] = useState([]);
   const [profilePicture, setProfilePicture] = useState(null);
   const [pendingRequests, setPendingRequests] = useState([]);
-
+  // const [data, setData] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   useEffect(() => {
     // Fetch and set profile picture logic
@@ -85,33 +86,42 @@ const Navbar = ({ darkMode, toggleMode }) => {
     }
   };
 
+  // FETCH FRIEND REQUEST
 
-// FETCH FRIEND REQUEST 
+  // useEffect(() => {
+  //   if (token) {
+  //     fetchPendingRequests();
+  //   }
+  // }, [token]);
 
-  useEffect(() => {
-    if (token) {
-      fetchPendingRequests();
-    }
-  }, [token]);
-  
-  const fetchPendingRequests = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/friends/requests`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setPendingRequests(data);
-      } else {
-        console.log("Error:", response);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  // const fetchPendingRequests = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/friends/requests`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setPendingRequests(data);
+  //     } else {
+  //       console.log("Error:", response);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const handleBack = () => {
+    navigate(-1); // Go back to the previous page
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // Navigate to the home page after logging out
+  };
   return (
     <div className="navbar">
       <ul className="navbar-links">
@@ -141,7 +151,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
                   placeholder="Search for friends"
                 />
                 {/* Dropdown to show search results */}
-                <ul className="search-results">
+                {/* <ul className="search-results">
                   {results.map((user) => (
                     <li key={user._id}>
                       <img
@@ -159,7 +169,7 @@ const Navbar = ({ darkMode, toggleMode }) => {
                       </div>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
                 <button className="input-field" onClick={handleSearch}>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
@@ -184,13 +194,18 @@ const Navbar = ({ darkMode, toggleMode }) => {
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link>
+              <Link to="/friends" className="link-container">
                 <FontAwesomeIcon icon={faUserGroup} />
-                {pendingRequests.length > 0 && (
+
+                {pendingRequests.length > 0 ? (
                   <span className="notification-badge">
                     {pendingRequests.length}
                   </span>
+                ) : (
+                  <span className="notification-badge">0</span>
                 )}
+
+                {/* <Friend userId={userId} token={token} /> */}
               </Link>
             </li>
             {/* Add Button component */}
