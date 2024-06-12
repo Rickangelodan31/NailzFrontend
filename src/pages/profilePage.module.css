@@ -21,20 +21,23 @@
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
+
+.labelimage {
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 40px;
+}
 /* a{
   display: flex;
   align-items: center;
   margin-left: 300px;
 } */
-.label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  margin-bottom: 10px;
-}
 
-textarea,
 input[type="text"] {
   /* width: 100px; */
   padding: 8px;
@@ -43,7 +46,6 @@ input[type="text"] {
   box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
-  
 }
 
 .button {
@@ -61,8 +63,6 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
 }
 
 .detailsContainer {
@@ -74,7 +74,6 @@ input[type="text"] {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  
 }
 
 .detailsContainer h2 {
@@ -82,27 +81,15 @@ input[type="text"] {
   margin-bottom: 10px;
 }
 
-.detailsContainer img {
+/* .detailsContainer img {
   width: 100%;
   max-width: 200px;
   height: auto;
   margin-bottom: 10px;
-}
+} */
 
 .detailsContainer p {
   margin-bottom: px;
-}
-
-.imageP {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.imagePP {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 500px;
 }
 
 .Butt {
@@ -110,6 +97,24 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
   width: 100px;
+}
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style for the profile picture */
+.profilePicture {
+  width: 60px; /* Adjust the width as needed */
+  height: 60px; /* Adjust the height as needed */
+  border-radius: 70%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the entire container */
+  margin-top: 20px; /* Adjust the top margin as needed */
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+ margin-left: 10px;
 }
 @media (max-width: 768px) {
   .profileContainer {

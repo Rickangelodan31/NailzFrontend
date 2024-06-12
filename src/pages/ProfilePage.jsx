@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button, Group } from "@mantine/core";
 import "@mantine/dropzone/styles.css";
@@ -6,20 +6,38 @@ import { SessionContext } from "../contexts/SessionContext";
 import classes from "./profilePage.module.css";
 import { useWindowScroll } from "@mantine/hooks";
 import Post from "../components/Post";
+import { useNavigate } from "react-router-dom";
+
 
 const ProfilePage = () => {
   const { token } = useContext(SessionContext);
 
+  const navigate = useNavigate();
+  const inputRef = useRef(null);
   const [files, setFiles] = useState([]);
   const [user, setUser] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+
   const [bio, setBio] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
   const [username, setUsername] = useState("");
-  const [scroll, scrollTo] = useWindowScroll("");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [image, setImage] = useState("");
+  // const [friends, setFriends] = useState([]);
+  // const [friendRequests, setFriendRequests] = useState("");
+  // const [imagePreview, setImagePreview] = useState(null);
+  const [data, setData] = useState("");
+  const [scroll, scrollTo] = useWindowScroll(); // Use Mantine's useWindowScroll hook
+
+  const handleUpdateClick = (postId) => {
+    navigate(`/update-post/${postId}`);
+  };
+
+  const handleUpdateUserDetailsClick = () => {
+    navigate("/update-user-details");
+  };
 
   async function fetchUserDetails() {
     try {
@@ -31,98 +49,186 @@ const ProfilePage = () => {
           },
         }
       );
+      if (!response.ok) {
+        throw new Error("Failed to fetch user details");
+      }
       const data = await response.json();
-      console.log(data);
-      // Update the product state with the fetched data
-      setUser(data);
+      if (data) {
+        setUser(data);
+        setProfilePicture(data.profilePicture);
+        setUsername(data.username);
+        setBio(data.bio);
+        setAge(data.age);
+      }
     } catch (error) {
-      // Log the error if the fetch fails
-      console.log("Error fetching user details:", error);
+      setError(`Error fetching user details: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
   }
+
   useEffect(() => {
     if (token) {
       fetchUserDetails();
     } else {
-      console.log("Token not provided or not valid");
+      setError("Token not provided or not valid");
+      setLoading(false);
     }
   }, [token]);
 
-  const handleProfilePictureUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("profilePicture", files[0]);
+  // async function fetchFriendRequests() {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/friends/requests`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setFriendRequests(data);
+  //   } catch (error) {
+  //     console.log("Error fetching friend requests:", error);
+  //   }
+  // }
 
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/profilePicture`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+  // async function fetchFriends() {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/friends`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setFriends(data);
+  //   } catch (error) {
+  //     console.log("Error fetching friends:", error);
+  //   }
+  // }
 
-      if (response.ok) {
-        const data = await response.json();
-        setProfilePicture(data.profilePicture);
-      } else {
-        console.error("Failed to upload profile picture");
-      }
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
-    }
-  };
+  // useEffect(() => {
+  //   if (token) {
+  //     fetchUserDetails();
+  //     fetchFriendRequests();
+  //     fetchFriends();
+  //   } else {
+  //     console.log("Token not provided or not valid");
+  //   }
+  // }, [token]);
 
-  const handleUpdateProfile = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            username,
-            bio,
-            age,
-          }),
-        }
-      );
+  // const handleAcceptRequest = async (userId) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/friends/accept`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({ userId }),
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       fetchUserDetails();
+  //       fetchFriendRequests();
+  //       fetchFriends();
+  //     } else {
+  //       console.error("Error accepting friend request:", response);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
-      if (response.ok) {
-        console.log("Profile updated successfully");
-        fetchUserDetails();
-      } else {
-        console.error("Failed to update profile");
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+  // const handleImageOnchange = (e) => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
 
+  //   reader.onloadend = () => {
+
+  //     setImagePreview(reader.result);
+  //   };
+
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // this fetchpost is fully functional
   useEffect(() => {
-    // Fetch posts from backend when component mounts
-    fetchPosts();
-  }, []);
+    const fetchUserAndPosts = async () => {
+      try {
+        // Fetch user details
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!userResponse.ok) {
+          throw new Error("Failed to fetch user details");
+        }
+        const userData = await userResponse.json();
+        setUser(userData);
 
-  const fetchPosts = async () => {
+        // Fetch posts
+        const postsResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/Designers`
+        );
+        if (!postsResponse.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+        const postsData = await postsResponse.json();
+        setPosts(postsData.reverse()); // Reverse posts array to display latest post first
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (token) {
+      fetchUserAndPosts();
+    } else {
+      setError("Token not provided or not valid");
+      setLoading(false);
+    }
+  }, [token]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // this delete button method is fully functional
+
+ 
+  const deletePost = async (id) => {
     try {
-      // Make API call to fetch posts from backend
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/Designers`
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/designers/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setPosts(data); // Assuming the response contains an array of posts
+        setPosts(posts.filter((post) => post._id !== id));
       } else {
-        setError("Failed to fetch posts");
+        setError("Failed to delete the post");
       }
     } catch (error) {
-      setError("Error fetching posts:", error);
-    } finally {
-      setLoading(false);
+      setError(`Error deleting the post: ${error.message}`);
     }
   };
 
@@ -134,83 +240,80 @@ const ProfilePage = () => {
     return <div>Error: {error}</div>;
   }
 
+
   return (
     <>
-      <div className={classes.profileContainer}>
-        <h2 className={classes.h2}>Profile Picture</h2>
 
-        {files.length > 0 && (
-          <Button
-            className={classes.Butt}
-            onClick={handleProfilePictureUpload}
-            style={{ marginTop: "10px" }}
-          >
-            Upload Profile Picture
-          </Button>
-        )}
-        {profilePicture && (
-          <img
-            className={classes.imagePP}
-            src={profilePicture}
-            alt="Profile"
-            style={{ marginTop: "10px", width: "200px" }}
-          />
-        )}
-      </div>
+     {/* UPDATE USER DETAILS */}
       <div className={classes.profileSection}>
-        <h2 className={classes.h2}>Edit Profile</h2>
-        <label className={classes.label}>
-          username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label className={classes.label}>
-          Bio:
-          <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-        </label>
-        <label className={classes.label}>
-          Age:
-          <input
-            type="text"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </label>
-        <Button onClick={handleUpdateProfile}>Update Profile</Button>
+        <h2>Profile</h2>
+        <button onClick={handleUpdateUserDetailsClick}>Update User Details</button>
       </div>
       <div className={classes.detailsContainer}>
-        <Button className={classes.Butt}>
+        <h3>Username: {user?.username}</h3>
+        <p>Bio: {user?.bio}</p>
+        <p>Age: {user?.age}</p>
+        {/* Add more user details as needed */}
+      </div>
+
+
+
+      {/* <div className={classes.friendRequests}>
+        <h2>Friend Requests</h2>
+        <ul>
+          {friendRequests.map((user) => (
+            <li key={user._id}>
+              <img
+                src={user.profilePicture}
+                alt={`${user.username}'s profile`}
+              />
+              <div>
+                <p>{user.username}</p>
+                <p>{user.email}</p>
+              </div>
+              <button onClick={() => handleAcceptRequest(user._id)}>
+                Accept
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div> */}
+
+      
+      {/* CREATE USER DETAILS */}
+      <div className={classes.detailsContainer}>
+        <button className={classes.Butt}>
           <Link
             style={{ textDecoration: "none", color: "white" }}
-            to="/newDesigner"
+            to="/newPost
+            "
           >
             Create Design
           </Link>
-        </Button>
-        {user ? (
-          <div className="details-Container">
-            <h2>{user.title}</h2>
-            <img src={user.image} alt={user.title} />
-            {/* <p>{user.price}</p>
-            <p> {user.description}</p> */}
-            {/* Add more product details here as needed */}
-          </div>
-        ) : (
-          <p>Loading product details...</p>
-        )}
+        </button>
+
+        {/* HANDLE UPDATE CLICK */}
         <div className={classes.centered}>
           {posts.map((post) => (
-            <Post key={post._id} post={post} className={classes.post} />
+            <div key={post._id} className={classes.postContainer}>
+              <Post post={post} className={classes.post} />
+              <button
+                className={classes.button}
+                onClick={() => handleUpdateClick(post._id)}
+              >
+                Update
+              </button>
+              <button
+                className={classes.button}
+                onClick={() => deletePost(post._id)}
+              >
+                Delete
+              </button>
+            </div>
           ))}
         </div>
 
         <Group className={classes.scrollbutton} justify="center">
-          {/* <Text>
-          Scroll position x: {scroll.x}, y: {scroll.y}
-        </Text> */}
           <Button onClick={() => scrollTo({ y: 0 })}>Scroll to top</Button>
         </Group>
       </div>
