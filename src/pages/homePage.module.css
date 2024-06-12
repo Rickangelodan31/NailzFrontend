@@ -14,7 +14,7 @@ img {
   width: 600px;
   border-radius: 20px;
 }
-.centered {
+.userCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,8 +29,26 @@ img {
   font-size: 1.5rem; /* Adjust post title font size */
 }
 .post p {
-  margin-top: 10px; 
+  margin-top: 10px;
   font-size: 1rem;
+}
+.button {
+  width: 100px;
+  height: 50px;
+  border-radius: 5;
+  color: blue;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  flex-direction: row;
+  margin-top: 20px;
+}
+.Post.Img {
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
 }
 .container {
   /* height: 100%; */
@@ -56,7 +74,7 @@ img {
     margin: 10px;
   }
 
-  img{
+  img {
     transform: scale(0.7);
     display: flex;
     justify-content: center;
@@ -67,7 +85,6 @@ img {
   .container {
     width: 100%;
     margin: 10px;
-    
   }
   img {
     width: 90%;
@@ -79,7 +96,6 @@ img {
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
-
   .container {
     width: 80%;
     margin: 5px;

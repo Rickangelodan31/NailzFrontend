@@ -34,7 +34,7 @@ const LoginPage = () => {
         navigate("/profile");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, "The email and password dosen't match ");
     }
   };
   const togglePasswordVisibility = () => {

@@ -1,51 +1,109 @@
-import { useEffect, useState } from "react";
-import Post from "../components/Post";
-import classes from "./homePage.module.css";
+import { useContext, useEffect, useState } from "react";
+import classes from "./homePage.module.css"; // Ensure this matches your CSS module import
+import { SessionContext } from "../contexts/SessionContext"; // Import SessionContext
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const { token, user } = useContext(SessionContext); // Destructure token and user from context
+
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
-  useEffect(() => {
-    // Fetch posts from backend when component mounts
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
+  const fetchData = async () => {
     try {
-      // Make API call to fetch posts from backend
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/Designers`
+        `${import.meta.env.VITE_API_URL}/api/designers`, // API endpoint
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Use token for authorization
+          },
+        }
       );
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setPosts(data); // Assuming the response contains an array of posts
+        const responseData = await response.json();
+        console.log(responseData);
+        setData(responseData.reverse()); // Reverse data to show latest first
       } else {
-        setError("Failed to fetch posts");
+        setError("Failed to fetch data");
       }
     } catch (error) {
-      setError("Error fetching posts:", error);
+      setError(`Error fetching data: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (token) {
+      fetchData(); // Fetch data if token exists
+    } else {
+      console.log("Token not provided or not valid");
+    }
+  }, [token]);
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // Show loading message while fetching
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error}</div>; // Show error message if there's an error
   }
+
+  const deletePost = async (id) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/designers/${id}`, // API endpoint for delete
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`, // Use token for authorization
+          },
+        }
+      );
+
+      if (response.ok) {
+        setData(data.filter((user) => user._id !== id)); // Filter out deleted post
+      } else {
+        setError("Failed to delete the post");
+      }
+    } catch (error) {
+      setError(`Error deleting the post: ${error.message}`);
+    }
+  };
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.h1}>Home Page</h1>
-      <div className={classes.centered}>
-        {posts.map((post) => (
-          <Post key={post._id} post={post} className={classes.post} />
+      <h1 className={classes.h1}>Home Page</h1> {/* Page heading */}
+      <div className={classes.container}>
+        {data.map((user) => (
+          <div key={user._id} className={classes.userCard}>
+            {" "}
+            {/* Ensure unique key */}
+            <div id={user._id}>{user.title}</div>
+            <div id={user._id}>{user.description}</div>
+            <div id={user._id}>{user.telephone}</div>
+            <div id={user._id}>{user.style}</div>
+            <img
+              src={user.image}
+              className={classes.PostImg}
+              alt="profile"
+            />{" "}
+            {/* User image */}
+            {user.owner === user._id && ( // Show buttons if user is the owner
+              <>
+                <button className={classes.button}>Update</button>{" "}
+                {/* Update button */}
+                <button
+                  className={classes.button}
+                  onClick={() => deletePost(user._id)}
+                >
+                  Delete
+                </button>{" "}
+                {/* Delete button */}
+              </>
+            )}
+          </div>
         ))}
       </div>
     </div>
