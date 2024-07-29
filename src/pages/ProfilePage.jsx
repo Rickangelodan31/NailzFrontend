@@ -7,11 +7,6 @@ import classes from "./profilePage.module.css"; // Changed CSS module
 import { useWindowScroll } from "@mantine/hooks"; // Added useWindowScroll for scrolling
 import Post from "../components/Post"; // Added Post component import
 import { useNavigate, useParams } from "react-router-dom"; // Added useNavigate and useParams
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 661bf14577939b8b11c016e963591d2da2000918
 
 const ProfilePage = () => {
   // Changed component name to ProfilePage and added match prop
