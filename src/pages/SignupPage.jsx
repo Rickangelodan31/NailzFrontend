@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(username, firstName, lastName, dateOfBirth, password);
+    console.log(username, firstName, lastName, dateOfBirth, email, password);
 
     try {
       const response = await fetch(
@@ -44,6 +44,9 @@ const SignupPage = () => {
         const newUser = await response.json();
         console.log(newUser);
         navigate("/login");
+      } else {
+        const errorData = await response.json();
+        console.error('Signup error:', errorData.message);
       }
     } catch (error) {
       console.log(error);
@@ -52,85 +55,83 @@ const SignupPage = () => {
 
   return (
     <div className={classes.page}>
-    <div className={classes.pageContainer}>
-      <div className="sign">
-        <h1>Signup</h1>
+      <div className={classes.pageContainer}>
+        <div className="sign">
+          <h1>Signup</h1>
 
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <div className={classes.inputContainer}>
-            <label className={classes.label}>
-              FirstName
-              <input
-                value={firstName}
-                placeholder="Firstname"
-                onChange={(event) => setFirstName(event.target.value)}
-                required
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              LastName
-              <input
-                value={lastName}
-                placeholder="Lastname"
-                onChange={(event) => setLastname(event.target.value)}
-                required
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              username
-              <input
-                value={username}
-                placeholder="username"
-                onChange={(event) => setUsername(event.target.value)}
-                required
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              Date Of Birth
-              <input
-                value={dateOfBirth}
-                placeholder="D.O.B"
-                onChange={(event) => setDateOfBirth(event.target.value)}
-                required
-                type="date"
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              Email
-              <input
-                value={email}
-                placeholder="Email"
-                onChange={(event) => setEmail(event.target.value)}
-                required
-                type="email"
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              Password
-              <input
-                value={password}
-                placeholder="Password"
-                onChange={(event) => setPassword(event.target.value)}
-                required
-                type="password"
-                className={classes.input}
-              />
-            </label>
-          </div>
-          <div className="button">
-            <button type="submit">Sign Up</button>
-          </div>
-        </form>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <div className={classes.inputContainer}>
+              <label className={classes.label}>
+                FirstName
+                <input
+                  value={firstName}
+                  placeholder="Firstname"
+                  onChange={(event) => setFirstName(event.target.value)}
+                  required
+                  className={classes.input}
+                />
+              </label>
+              <label className={classes.label}>
+                LastName
+                <input
+                  value={lastName}
+                  placeholder="Lastname"
+                  onChange={(event) => setLastname(event.target.value)}
+                  required
+                  className={classes.input}
+                />
+              </label>
+              <label className={classes.label}>
+                username
+                <input
+                  value={username}
+                  placeholder="username"
+                  onChange={(event) => setUsername(event.target.value)}
+                  required
+                  className={classes.input}
+                />
+              </label>
+              <label className={classes.label}>
+                Date Of Birth
+                <input
+                  value={dateOfBirth}
+                  placeholder="D.O.B"
+                  onChange={(event) => setDateOfBirth(event.target.value)}
+                  required
+                  type="date"
+                  className={classes.input}
+                />
+              </label>
+              <label className={classes.label}>
+                Email
+                <input
+                  value={email}
+                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                  type="email"
+                  className={classes.input}
+                />
+              </label>
+              <label className={classes.label}>
+                Password
+                <input
+                  value={password}
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                  type="password"
+                  className={classes.input}
+                />
+              </label>
+            </div>
+            <div className="button">
+              <button type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
       </div>
-
-      
-    </div>
-    <Group className={classes.scrollbutton} justify="center">
+      <Group className={classes.scrollbutton} justify="center">
         {/* <Text>
           Scroll position x: {scroll.x}, y: {scroll.y}
         </Text> */}

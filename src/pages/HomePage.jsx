@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import classes from "./homePage.module.css"; // Ensure this matches your CSS module import
 import { SessionContext } from "../contexts/SessionContext"; // Import SessionContext
+import classes from "./HomePage.module.css"; // Changed CSS module
 
 const HomePage = () => {
-  const { token, user } = useContext(SessionContext); // Destructure token and user from context
+  const { token, currentUser } = useContext(SessionContext); // Destructure token and user from context
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [post, setPost] = useState();
 
   const fetchData = async () => {
     try {
@@ -78,30 +78,27 @@ const HomePage = () => {
       <div className={classes.container}>
         {data.map((user) => (
           <div key={user._id} className={classes.userCard}>
-            {" "}
             {/* Ensure unique key */}
             <div id={user._id}>{user.title}</div>
             <div id={user._id}>{user.description}</div>
             <div id={user._id}>{user.telephone}</div>
             <div id={user._id}>{user.style}</div>
-            <img
-              src={user.image}
-              className={classes.PostImg}
-              alt="profile"
-            />{" "}
+            <img src={user.image} className={classes.PostImg} alt="profile" />
             {/* User image */}
-            {user.owner === user._id && ( // Show buttons if user is the owner
-              <>
-                <button className={classes.button}>Update</button>{" "}
-                {/* Update button */}
+            {user.owner === currentUser._id && ( // Check if current user is the owner
+              <div>
                 <button
+                  id={user._posts}
+                  type="button"
                   className={classes.button}
                   onClick={() => deletePost(user._id)}
                 >
                   Delete
-                </button>{" "}
-                {/* Delete button */}
-              </>
+                </button>
+                <button type="button" className={classes.button}>
+                  Update
+                </button>
+              </div>
             )}
           </div>
         ))}

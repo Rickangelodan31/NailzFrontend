@@ -4,9 +4,9 @@ import { Button } from "@mantine/core";
 import { SessionContext } from "../contexts/SessionContext";
 import { Token } from "@mui/icons-material";
 
+const Post = ({ post, currentUser, handleDelete, handleUpdate }) => {
 
-const Post = ({ post}) => {
- 
+
   const [showOverlay, setShowOverlay] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -20,6 +20,7 @@ const Post = ({ post}) => {
     setShowOverlay(false);
   };
 
+  const isPostOwner = currentUser && post.userId === currentUser.id;
   
 
   return (
@@ -35,6 +36,12 @@ const Post = ({ post}) => {
       {showOverlay && (
         <div className={classes.overlay} onClick={handleCloseOverlay}>
           <img src={selectedImage} alt={`Title: ${post.title}`} />
+        </div>
+      )}
+      {isPostOwner && (
+        <div className={classes.button}>
+          <button onClick={() => handleUpdate(post.id)}>Update</button>
+          <button onClick={() => handleDelete(post.id)}>Delete</button>
         </div>
       )}
     </div>

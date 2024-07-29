@@ -13,20 +13,28 @@ img {
   align-items: center;
   width: 600px;
   border-radius: 20px;
+  justify-content: space-between;
 }
 .userCard {
+  width: 2000px;
+  height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 2px;
+  justify-content: space-between;
+  margin-top: 5px;
 }
 
 .post {
   flex-wrap: wrap;
   font-size: 20px;
   border: 1px;
+  margin-top: 5px;
 }
 .post h2 {
   font-size: 1.5rem; /* Adjust post title font size */
+  margin-top: 5px;
 }
 .post p {
   margin-top: 10px;
@@ -34,24 +42,18 @@ img {
 }
 .button {
   width: 100px;
-  height: 50px;
+  height: 100px;
   border-radius: 5;
   color: blue;
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   margin-top: 20px;
 }
-.Post.Img {
-  width: 500px;
-  height: 500px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-}
+
 .container {
-  /* height: 100%; */
+  height: 100%;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 0px;

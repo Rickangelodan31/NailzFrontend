@@ -1,94 +1,79 @@
-import { createContext, useEffect, useState, useCallback } from "react";
+import { createContext, useEffect, useState } from 'react'
 
-export const SessionContext = createContext();
+export const SessionContext = createContext()
 
 const SessionContextProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState({
-    id: "userA_id",
-    firstName: "John",
-    lastName: "Doe",
-  }); // Example user
+  const [token, setToken] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
-  const verifyToken = useCallback(async (currentToken) => {
+  const verifyToken = async currentToken => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/verify`,
-        {
-          headers: {
-            Authorization: `Bearer ${currentToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
+        headers: {
+          Authorization: `Bearer ${currentToken}`,
+        },
+      })
 
       if (response.ok) {
-        const parsed = await response.json();
-        console.log(parsed);
-        setToken(currentToken);
-        setUser(parsed.user); // Assuming the response includes user data
+        const parsed = await response.json()
+        console.log(parsed)
+        setToken(currentToken)
+        setIsLoading(false)
       } else {
-        window.localStorage.removeItem("authToken");
+        window.localStorage.removeItem('authToken')
+        setIsLoading(false)
       }
     } catch (error) {
-      console.error("Failed to verify token:", error);
-      window.localStorage.removeItem("authToken");
-    } finally {
-      setIsLoading(false);
+      console.log(error)
+      window.localStorage.removeItem('authToken')
+      setIsLoading(false)
     }
-  }, []);
+  }
 
   useEffect(() => {
-    const potentialToken = window.localStorage.getItem("authToken");
+    const potentialToken = window.localStorage.getItem('authToken')
     if (potentialToken) {
-      verifyToken(potentialToken);
+      verifyToken(potentialToken)
     } else {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  }, [verifyToken]);
+  }, [])
 
   useEffect(() => {
     if (token) {
-      window.localStorage.setItem("authToken", token);
+      window.localStorage.setItem('authToken', token)
     }
-  }, [token]);
+  }, [token])
 
   const logout = () => {
-    setToken(null);
-    window.localStorage.removeItem("authToken");
-  };
+    setToken()
+    window.localStorage.removeItem('authToken')
+  }
 
-  const withToken = async (endpoint, method = "GET", payload) => {
+  const withToken = async (endpoint, method = 'GET', payload) => {
     try {
-      const options = {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api${endpoint}`, {
         method,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-      };
-
-      if (payload) {
-        options.body = JSON.stringify(payload);
+        body: JSON.stringify(payload),
+      })
+      if (response.ok) {
+        const newBook = await response.json()
+        console.log(newBook)
       }
-
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api${endpoint}`,
-        options
-      );
-      return response;
     } catch (error) {
-      console.error("Failed to fetch with token:", error);
+      console.log(error)
     }
-  };
+  }
 
   return (
-    <SessionContext.Provider
-      value={{ token, setToken, logout, isLoading, withToken, user, setUser }}
-    >
+    <SessionContext.Provider value={{ token, setToken, logout, isLoading, withToken }}>
       {children}
     </SessionContext.Provider>
-  );
-};
+  )
+}
 
-export default SessionContextProvider;
+export default SessionContextProvider

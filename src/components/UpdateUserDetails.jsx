@@ -95,33 +95,32 @@ const UpdateUserDetails = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
+  const handleChange = (e) => ({
+    [e.target.name]: e.target.value,
+    userName: "",
+    bio: "",
+    age: "",
+  });
   // RENDER FORM TO UPDATE USER DETAILS
   return (
     <div className={classes.updateContainer}>
       <h2>Update User Details</h2>
       <label>
         Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <input type="text" value={username} onChange={handleChange} />
       </label>
       <label>
         Bio:
-        <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+        <textarea value={bio} onChange={handleChange} />
       </label>
       <label>
         Age:
-        <input
-          type="number"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
+        <input type="number" value={age} onChange={handleChange} />
       </label>
       <button onClick={handleUpdate}>Update User Details</button>
-      <button className={classes.button}onClick={handleBack}>Back</button>
+      <button className={classes.button} onClick={handleBack}>
+        Back
+      </button>
     </div>
   );
 };

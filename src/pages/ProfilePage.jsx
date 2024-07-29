@@ -8,8 +8,7 @@ import { useWindowScroll } from "@mantine/hooks"; // Added useWindowScroll for s
 import Post from "../components/Post"; // Added Post component import
 import { useNavigate, useParams } from "react-router-dom"; // Added useNavigate and useParams
 
-
-const ProfilePage = ({ match }) => {
+const ProfilePage = () => {
   // Changed component name to ProfilePage and added match prop
   const { token } = useContext(SessionContext);
   const { userId } = useParams; // Added useParams to get userId
@@ -17,15 +16,12 @@ const ProfilePage = ({ match }) => {
   const navigate = useNavigate(); // Added navigate for navigation
   const inputRef = useRef(null); // Added useRef for file input
   const [user, setUser] = useState(""); // Added state for user
-  const [profilePicture, setProfilePicture] = useState(null); // Added state for profile picture
-
   const [bio, setBio] = useState(""); // Added state for bio
   const [age, setAge] = useState(0); // Added state for age
   const [username, setUsername] = useState(""); // Added state for username
   const [posts, setPosts] = useState([]); // Changed state name to posts
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [image, setImage] = useState(""); // Added state for image
   const [scroll, scrollTo] = useWindowScroll(); // Added useWindowScroll hook
 
   useEffect(() => {
@@ -43,7 +39,7 @@ const ProfilePage = ({ match }) => {
   };
 
 
-  const handleDeleteClick = async (postId) => {
+  const handleDeletePost = async (postId) => {
     if(window.confirm("do you want to delete"))
     try {
       const response = await fetch(
@@ -53,7 +49,7 @@ const ProfilePage = ({ match }) => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          
+
         }
       );
       if (!response.ok) {
@@ -64,12 +60,6 @@ const ProfilePage = ({ match }) => {
       setError(`Error deleting post: ${error.message}`);
     }
   };
-
-
-
-
-
-
 
   async function fetchUserDetails() {
     // Added function to fetch user details
@@ -157,8 +147,6 @@ const ProfilePage = ({ match }) => {
     return <div>Error: {error}</div>;
   }
 
-  
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -200,7 +188,7 @@ const ProfilePage = ({ match }) => {
 
       <div className={classes.detailsContainer}>
         {/* Modified class name */}
-        <button className={classes.Butt}>
+        <button type="button" className={classes.Butt}>
           {/* Modified class name */}
           <Link
             style={{ textDecoration: "none", color: "white" }}
@@ -220,19 +208,19 @@ const ProfilePage = ({ match }) => {
               {post.ownerId === user?._id && (
                 <>
                   <button
+                    type="button"
                     className={classes.button}
                     onClick={() => handleUpdateClick(post._id)}
                   >
                     Update
                   </button>
                   <button
+                    type="button"
                     className={classes.button}
-                    onClick={() => handleDeleteClick(post._id)}
+                    onClick={() => handleDeletePost(users._id)}
                   >
                     Delete
                   </button>
-                 
-                  
                 </>
               )}
             </div>

@@ -14,7 +14,7 @@ const AboutPage = () => {
       <h1>About Us</h1>
       <div className={classes.navAbt}>
         <div className={classes.RicAbt}>
-          <img className={classes.img}src={Ricky} alt="Ricky" />
+          <img className={classes.img} src={Ricky} alt="Ricky" />
           <h1 className={classes.h1}>Ricardo Watson</h1>
           <h2 className={classes.h2}>CEO</h2>
           <h3 className={classes.h3}>Age: 32</h3>

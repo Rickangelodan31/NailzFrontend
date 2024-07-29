@@ -4,7 +4,7 @@ import ProfilePage from "../pages/ProfilePage";
 import PostList from "../components/PostList"; // Ensure this path is correct
 
 const ParentComponent = () => {
-  const { token } = useContext(SessionContext);
+  const { token, currentUser } = useContext(SessionContext);
   const [friendRequests, setFriendRequests] = useState([]);
   const [posts, setPosts] = useState([]); // Initialize your posts data
 
@@ -30,7 +30,29 @@ const ParentComponent = () => {
     fetchRequests();
   }, [token]);
 
-  const handleDeletePost = async (postId) => {
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/posts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data);
+        } else {
+          console.error("Error fetching posts:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+    fetchPosts();
+  }, [token]);
+
+  const handleDelete = async (postId) => {
     console.log("Deleting post with ID:", postId); // Log the postId
     try {
       const response = await fetch(
@@ -55,9 +77,19 @@ const ParentComponent = () => {
     }
   };
 
+  const handleUpdate = (postId) => {
+    console.log("Updating post with ID:", postId);
+    // Logic to update the post
+  };
+
   return (
     <div>
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        currentUser={currentUser}
+        handleDelete={handleDelete}
+        handleUpdate={(postId) => console.log("Update post with ID:", postId)} // Placeholder handleUpdate function
+      />
       <ProfilePage friendRequests={friendRequests} />
     </div>
   );

@@ -1,0 +1,68 @@
+/* Friend.module.css */
+
+.friend {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.friend h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.friend p {
+  font-size: 16px;
+  color: #555;
+}
+
+.friend .user.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friend .user.item {
+  margin-bottom: 10px;
+}
+
+.friend .add.friend.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.friend .add.friend.button:hover {
+  background-color: #0056b3;
+}
+
+.friend .selected-user {
+  margin-top: 20px;
+}
+
+.friend .friends-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friend .friend-item {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.friend .button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.friend .button:hover {
+  background-color: #0056b3;
+}

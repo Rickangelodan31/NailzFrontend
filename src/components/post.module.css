@@ -24,6 +24,16 @@
   cursor: pointer;
 }
 
+.button {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50%;
+  text-align: center;
+  /* width: 500px; */
+}
+
 .overlay {
   position: fixed;
   top: 0;
