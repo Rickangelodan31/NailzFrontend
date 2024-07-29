@@ -5,16 +5,17 @@ import classes from "./loginPage.module.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
   const { setToken } = useContext(SessionContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(username, password);
+    setError(null);
+    // console.log(username, password);
 
     try {
       const response = await fetch(

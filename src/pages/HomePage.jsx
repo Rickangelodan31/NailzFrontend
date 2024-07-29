@@ -8,7 +8,7 @@ const HomePage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [post, setPost] = useState();
+  const [post, setPost] = useState();
 
   const fetchData = async () => {
     try {
@@ -50,8 +50,13 @@ const HomePage = () => {
     return <div>Error: {error}</div>; // Show error message if there's an error
   }
 
-  const deletePost = async (id) => {
+  const Delete = async (id) => {
     try {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+      if (!confirmDelete) return;
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/designers/${id}`, // API endpoint for delete
         {
@@ -68,6 +73,7 @@ const HomePage = () => {
         setError("Failed to delete the post");
       }
     } catch (error) {
+      // Handle any errors during the deletion process
       setError(`Error deleting the post: ${error.message}`);
     }
   };
@@ -85,13 +91,13 @@ const HomePage = () => {
             <div id={user._id}>{user.style}</div>
             <img src={user.image} className={classes.PostImg} alt="profile" />
             {/* User image */}
-            {user.owner === currentUser._id && ( // Check if current user is the owner
+            {user.owner === currentUser && ( // Check if current user is the owner
               <div>
                 <button
                   id={user._posts}
                   type="button"
                   className={classes.button}
-                  onClick={() => deletePost(user._id)}
+                  onClick={() => Delete(user._id)}
                 >
                   Delete
                 </button>
