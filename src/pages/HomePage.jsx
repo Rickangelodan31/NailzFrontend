@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext"; // Import SessionContext
-import classes from "./HomePage.module.css"; // Changed CSS module
+import classes from "./homePage.module.css"; // Changed CSS module
 
 const HomePage = () => {
   const { token, currentUser } = useContext(SessionContext); // Destructure token and user from context
