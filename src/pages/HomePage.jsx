@@ -3,7 +3,7 @@ import { SessionContext } from "../contexts/SessionContext"; // Import SessionCo
 import classes from "./homePage.module.css"; // Changed CSS module
 
 const HomePage = () => {
-  const { token, currentUser } = useContext(SessionContext); // Destructure token and user from context
+  const { token} = useContext(SessionContext); // Destructure token and user from context
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
